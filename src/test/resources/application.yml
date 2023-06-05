@@ -1,0 +1,8 @@
+logging:
+  level:
+    root: dasfe
+    com:
+      thepuar: ERROR
+    org:
+      apache:
+        poi: NONE
