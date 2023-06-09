@@ -54,7 +54,7 @@ public class ReadExcelService {
         Row row = hoja.getRow(numeroFila);
         libroMedicion.setNumeroDeExperimento(this.getDataStringFromCell(row,2));
         libroMedicion.setFecha(this.getDataLocalDateTimeFromCell(row,5));
-        libroMedicion.setHora(this.getDataDoubleFromCell(row,10));
+        libroMedicion.setHoraSolar(this.getDataDoubleFromCell(row,10));
 
         //File Medicion
         numeroFila=3;
@@ -84,6 +84,7 @@ public class ReadExcelService {
         //Tamanyo particula
         numeroFila = 11;
         row = hoja.getRow(numeroFila);
+
         libroMedicion.setTamanyoDeParticula(this.getDataDoubleFromCell(row,0));
         libroMedicion.setPesoParticula(this.getDataDoubleFromCell(row,4));
         libroMedicion.setPotencia(this.getDataDoubleFromCell(row,8));
@@ -98,7 +99,7 @@ public class ReadExcelService {
         //Analisis comparativo
         numeroFila = 15;
         row = hoja.getRow(numeroFila);
-        libroMedicion.setAnalisisCompDeT(this.getDataStringFromCell(row,0));
+        libroMedicion.setAnalisisCompDeT(this.getDataDoubleFromCell(row,0));
         libroMedicion.setSuperficieDeLaMuestra(this.getDataDoubleFromCell(row,4));
         libroMedicion.setInclinacionSolar(this.getDataDoubleFromCell(row,8));
 
@@ -116,7 +117,7 @@ public class ReadExcelService {
         }catch(Exception e){
             char character = 'A';
             character=(char)(character+number+1);
-            log.error("Error de formato en la celda: "+character+(row.getRowNum()+1));
+            log.error("String - Error de formato en la celda: "+character+(row.getRowNum()+1));
         }
         return value;
     }
@@ -125,10 +126,14 @@ public class ReadExcelService {
         Double value =-100.0;
         try {
             value =  row.getCell(number).getNumericCellValue();
+
         }catch(Exception e){
+
             char character = 'A';
             character=(char)(character+number+1);
-            log.error("Error de formato en la celda: "+character+(row.getRowNum()+1));
+            log.error("Double - Error de formato en la celda: "+character+(row.getRowNum()+1)+" - Contenido: "+row.getCell(number).getStringCellValue());
+            value = Double.parseDouble(row.getCell(number).getStringCellValue().replace("m","").trim().replace(',','.'));
+            log.warn("Lo he transformado al valor "+value);
         }
         return value;
     }
@@ -140,7 +145,7 @@ public class ReadExcelService {
         }catch(Exception e){
             char character = 'A';
             character=(char)(character+number+1);
-            log.error("Error de formato en la celda: "+character+(row.getRowNum()+1));
+            log.error("Data - Error de formato en la celda: "+character+(row.getRowNum()+1));
         }
         return value;
     }

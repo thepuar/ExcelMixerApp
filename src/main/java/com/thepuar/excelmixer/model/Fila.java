@@ -26,7 +26,7 @@ public class Fila {
     private Double tAmbiente;
     private Double tCamaraTermigrafica;
     private Double hora;
-    private String analisisCompDeT;
+    private Double analisisCompDeT;
     private Double superficieDeLaMuestra;
     private Double inclinacionSolar;
 }

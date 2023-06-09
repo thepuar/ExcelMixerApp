@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 public class ExcelMixerServiceTest{
 
+    public static final java.lang.String FOLDER_PATH = "C:\\Users\\xicle\\project\\data\\Carpeta Prueba B";
     ReadExcelService service;
 
     @BeforeEach
@@ -24,7 +25,7 @@ public class ExcelMixerServiceTest{
 
     @Test
     void getDataFromFileTest(){
-        String path = "/home/fperez/Descargas/ParaFran/Carpeta Prueba B/EXP_01_PJ(23-03-23)/EXP_01_PJ_MED_00.xlsx";
+        String path = FOLDER_PATH+"\\EXP_01_PJ(23-03-23)/EXP_01_PJ_MED_00.xlsx";
         File file = new File(path);
         LibroMedicion libroMedicion = null;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -63,7 +64,7 @@ public class ExcelMixerServiceTest{
 
     @Test
     void getExcelsTest(){
-        service.setInputFolder("/home/fperez/Descargas/ParaFran/Carpeta Prueba B");
+        service.setInputFolder(FOLDER_PATH);
         System.out.println(service.getExcels().size());
         for(File file : service.getExcels()){
             log.info("Nombre fichero: "+file.getAbsolutePath());
@@ -72,7 +73,7 @@ public class ExcelMixerServiceTest{
 
     @Test
     void validaExcelsTest(){
-        service.setInputFolder("/home/fperez/Descargas/ParaFran/Carpeta Prueba B");
+        service.setInputFolder(FOLDER_PATH);
         log.info(service.getExcels().size()+"");
         for(File file : service.getExcels()){
             service.getDataFromFile(file);

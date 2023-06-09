@@ -1,3 +1,4 @@
 excelapp:
   input:
-    folder: /home/fperez/Descargas/ParaFran/Carpeta Prueba B
+    folder: C:\\Users\\xicle\\project\\data\\Carpeta Prueba B
+  output: C:\\Users\\xicle\\project\\data\\output\\resultado.xlsx
